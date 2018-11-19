@@ -1,0 +1,9 @@
+{
+    "name": "Drugi plugin",
+    "description": "Opis drugog plugin-a",
+    "symbolic_name": "org.singidunum.plugin_drugi",
+    "app_version": "1.0.0",
+    "version": "1.0.0",
+    "category": "general",
+    "enabled": true
+}

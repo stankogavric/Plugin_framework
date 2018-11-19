@@ -1,0 +1,9 @@
+{
+    "name": "Prvi plugin",
+    "description": "Opis prvog plugin-a",
+    "symbolic_name": "rs.ac.singidunum.plugin_prvi",
+    "app_version": "1.0.0",
+    "version": "1.0.0",
+    "category": "general",
+    "enabled": true
+}
