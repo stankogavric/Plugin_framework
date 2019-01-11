@@ -40,3 +40,6 @@ class Plugin:
 
     def __str__(self):
         return "Plugin: {}, version: {}.".format(self.name, self.version)
+
+    def get_widget(self, parent=None):
+        raise NotImplementedError("Ovo mora biti implementirano u konkretnom plugin-u!")
