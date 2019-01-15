@@ -1,0 +1,9 @@
+{
+    "name": "Vodjenje magacina",
+    "description": "Vodjenje proizvoda unutar magacina po halama",
+    "symbolic_name": "magacin",
+    "app_version": "1.0.0",
+    "version": "1.0.0",
+    "category": "general",
+    "enabled": true
+}
