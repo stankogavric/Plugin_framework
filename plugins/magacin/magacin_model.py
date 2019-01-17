@@ -175,6 +175,7 @@ class MagacinModel(QtCore.QAbstractTableModel):
         self.endInsertRows()
         self.save_data()
         open("plugins/magacin/"+data["name"]+".csv", "w")
+        return 0
 
     def add_new_proizvod(self, data : dict):
         """

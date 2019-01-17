@@ -1,9 +1,7 @@
 from PySide2 import QtWidgets
 from PySide2 import QtGui
 from ..hala_model import HalaModel
-from .dialogs.add_proizvod_dialog import AddProizvodDialog
-from .dialogs.remove_proizvod_dialog import RemoveProizvodDialog
-from .dialogs.change_proizvod_dialog import ChangeProizvodDialog
+from .dialogs.dialog import Dialog
 
 class HalaWidget(QtWidgets.QWidget):
     """
@@ -90,7 +88,7 @@ class HalaWidget(QtWidgets.QWidget):
         Metoda koja se poziva na klik dugmeta add.
         Otvara dijalog sa formom za dodavanje proizvoda u halu.
         """
-        dialog = AddProizvodDialog(self.parent())
+        dialog = Dialog().getAddProizvodDialog(self.parent())
         # znaci da je neko odabrao potvrdni odgovor na dijalog
         if dialog.exec_() == QtWidgets.QDialog.Accepted:
             ind = self.table_view.model().add(dialog.get_data())
@@ -134,7 +132,6 @@ class HalaWidget(QtWidgets.QWidget):
         Metoda koja se poziva na klik dugmeta change.
         Otvara dijalog sa formom za izmjenu proizvoda u hali.
         """
-
         index = sorted(set(map(lambda x: x.row(), self.table_view.selectedIndexes())))
         if(len(index)==0):
             message = QtWidgets.QMessageBox(self.parent())
@@ -154,7 +151,7 @@ class HalaWidget(QtWidgets.QWidget):
             message.setStandardButtons(QtWidgets.QMessageBox.Ok)
             message.exec_()
             return
-        dialog = ChangeProizvodDialog(self.parent())
+        dialog = Dialog().getChangeProizvodDialog(self.parent())
         # znaci da je neko odabrao potvrdni odgovor na dijalog
         if dialog.exec_() == QtWidgets.QDialog.Accepted:
             self.table_view.model().change(self.table_view.selectedIndexes(), dialog.get_data(), self._name)
@@ -190,7 +187,7 @@ class HalaWidget(QtWidgets.QWidget):
             message.setStandardButtons(QtWidgets.QMessageBox.Ok)
             message.exec_()
             return
-        dialog = RemoveProizvodDialog(self.parent())
+        dialog = Dialog().getRemoveProizvodDialog(self.parent())
         # znaci da je neko odabrao potvrdni odgovor na dijalog
         if dialog.exec_() == QtWidgets.QDialog.Accepted:
             ind = self.table_view.model().remove(self.table_view.selectedIndexes(), dialog.get_data(), self._name)

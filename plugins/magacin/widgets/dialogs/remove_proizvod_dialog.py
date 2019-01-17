@@ -1,4 +1,4 @@
-from PySide2 import QtWidgets, QtCore, QtGui
+from PySide2 import QtWidgets
 
 class RemoveProizvodDialog(QtWidgets.QDialog):
     """

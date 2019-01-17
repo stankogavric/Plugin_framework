@@ -1,10 +1,7 @@
 from PySide2 import QtWidgets
 from PySide2 import QtGui
 from ..magacin_model import MagacinModel
-from ..hala_model import HalaModel
-from .dialogs.add_hala_dialog import AddHalaDialog
-from .dialogs.add_proizvod_dialog import AddProizvodDialog
-from .dialogs.add_new_proizvod_dialog import AddNewProizvodDialog
+from .dialogs.dialog import Dialog
 from .hala_widget import HalaWidget
 
 class MagacinWidget(QtWidgets.QWidget):
@@ -137,7 +134,7 @@ class MagacinWidget(QtWidgets.QWidget):
         Metoda koja se poziva na klik dugmeta add.
         Otvara dijalog sa formom za kreiranje nove hale u magacinu.
         """
-        dialog = AddHalaDialog(self.parent())
+        dialog = Dialog().getAddHalaDialog(self.parent())
         # znaci da je neko odabrao potvrdni odgovor na dijalog
         if dialog.exec_() == QtWidgets.QDialog.Accepted:
             ind = self.table_view.model().add(dialog.get_data())
@@ -150,13 +147,20 @@ class MagacinWidget(QtWidgets.QWidget):
                 message.setStandardButtons(QtWidgets.QMessageBox.Ok)
                 message.exec_()
                 self._on_add()
+            elif(ind == 0):
+                message = QtWidgets.QMessageBox(self.parent())
+                message.setIcon(QtWidgets.QMessageBox.Information)
+                message.setText("Uspijesno dodavanje hale!")
+                message.setWindowTitle("Obavjestenje")
+                message.setStandardButtons(QtWidgets.QMessageBox.Ok)
+                message.exec_()
 
     def _on_add_new_proizvod(self):
         """
         Metoda koja se poziva na klik dugmeta add_new_proizvod.
         Otvara dijalog sa formom za kreiranje novog proizvoda.
         """
-        dialog = AddNewProizvodDialog(self.parent())
+        dialog = Dialog().getAddNewProizvodDialog(self.parent())
         # znaci da je neko odabrao potvrdni odgovor na dijalog
         if dialog.exec_() == QtWidgets.QDialog.Accepted:
             ind = self.table_view.model().add_new_proizvod(dialog.get_data())
@@ -190,13 +194,20 @@ class MagacinWidget(QtWidgets.QWidget):
             message.setWindowTitle("Greska")
             message.setStandardButtons(QtWidgets.QMessageBox.Ok)
             message.exec_()
+        elif(ind == 0):
+                message = QtWidgets.QMessageBox(self.parent())
+                message.setIcon(QtWidgets.QMessageBox.Information)
+                message.setText("Uspijesno uklanjanje!")
+                message.setWindowTitle("Obavjestenje")
+                message.setStandardButtons(QtWidgets.QMessageBox.Ok)
+                message.exec_()
 
     def _on_add_proizvod(self):
         """
         Metoda koja se poziva na klik dugmeta add_proizvod.
         Otvara dijalog sa formom za dodavanje proizvoda u halu.
         """
-        dialog = AddProizvodDialog(self.parent())
+        dialog = Dialog().getAddProizvodDialog(self.parent())
         # znaci da je neko odabrao potvrdni odgovor na dijalog
         if dialog.exec_() == QtWidgets.QDialog.Accepted:
             ind = self.table_view.model().add_proizvod(dialog.get_data())

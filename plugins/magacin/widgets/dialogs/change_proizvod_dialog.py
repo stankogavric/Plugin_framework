@@ -1,5 +1,4 @@
-from PySide2 import QtWidgets, QtCore, QtGui
-import csv
+from PySide2 import QtWidgets, QtCore
 
 class ChangeProizvodDialog(QtWidgets.QDialog):
     """
@@ -37,8 +36,5 @@ class ChangeProizvodDialog(QtWidgets.QDialog):
     def get_data(self):
         """
         Dobavlja podatke iz forme.
-
-        :returns: dict -- rjecnik s podacima iz forme.
         """
-
         return self.date_input.text()

@@ -1,6 +1,5 @@
 from PySide2 import QtCore
 import csv
-import os
 
 class HalaModel(QtCore.QAbstractTableModel):
     """
@@ -208,7 +207,15 @@ class HalaModel(QtCore.QAbstractTableModel):
 
         index = sorted(set(map(lambda x: x.row(), index)))
 
-        self._data[index[0]][2] = date
+        postoji = False
+        for p in self._data:
+            if(p[2]==date):
+                p[1]=(int)(p[1])+(int)(self._data[index[0]][1])
+                self._data[index[0]][1] = 0
+                postoji = True
+                break
+        if(postoji is False):
+            self._data[index[0]][2] = date
         self.save_data("plugins/magacin/"+name+".csv")
         self.load_data("plugins/magacin/"+name+".csv")
 
@@ -247,7 +254,6 @@ class HalaModel(QtCore.QAbstractTableModel):
             writer = csv.writer(fp, dialect=csv.unix_dialect)
             for row in self._data:
                 writer.writerow(row)
-            #writer.writerows(self._data)
 
     def get_data(self):
         return self._data
@@ -266,12 +272,3 @@ class HalaModel(QtCore.QAbstractTableModel):
         for p in self._data:
             zauzeto += (int)(p[1])
         return zauzeto/capacity*100
-
-    def get_zauzeto(self, name):
-        """
-        Metoda koja vraca kao rezultat zauzetost hale.
-        """
-        zauzeto = 0
-        for p in self._data:
-            zauzeto += (int)(p[1])
-        return zauzeto
